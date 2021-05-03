@@ -1,6 +1,7 @@
 base_array = [1]        
 processed_array = [1]
-input_spiral = 501 #501 by 501 spiral  
+input_spiral = 131 # size
+mod = 19 # n
 
 def establish_array(ceiling):  # lets create our array first
     ceiling*=ceiling
@@ -12,7 +13,7 @@ def establish_array(ceiling):  # lets create our array first
         next_val = 1 + x  
         base_array.append(next_val) 
 
-def scan_and_add():  # scan the array and add the correct parts up
+def scan_and_add(modifer):  # scan the array and add the correct parts up
     odd_pattern = 1  # after every 1 crap number, add the good one to our out array
     odd_pattern_saved = 1
     end_count = 0  # all the good nums come in seqences of 4
@@ -30,14 +31,16 @@ def scan_and_add():  # scan the array and add the correct parts up
     diag_result = 0
     for x in processed_array:
         diag_result += x  # add it all up, place in diag, this is our result
-    return diag_result
+        final_result = diag_result + (len(processed_array) * (modifer - 1))
+    return final_result
 
-def spiralize(spiral):
-    establish_array(spiral)
+def spiralize(size, n=1):
+    establish_array(size)
     base_array.remove(1)  # nastyness but should do the trick
-    solution = scan_and_add()
-    print(solution)
+    return_value = scan_and_add(n)
+    #print(return_value)
     #print(len(processed_array))
-    return solution
+    return return_value
 
-spiralize(input_spiral)
+spiralize(input_spiral, mod)
+
